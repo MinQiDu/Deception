@@ -3,6 +3,7 @@
 
 #include "deception.h"
 #include <string>
+#include <fstream>
 
 class algo_TB
 {
@@ -31,7 +32,15 @@ private :
 	
 	template<typename T>
 	void Create_Record(const string& filename,
-			const vector<T>& content);         /*產生紀錄內容的文字檔，因為實作在多種型別上所以使用template*/
+		const vector<T>& content)
+	{
+		ofstream file(filename);
+		for (int i = 0; i < mnfes; ++i)
+		{
+			file << i + 1 << " " << content[i] << "\n";
+		}
+		file.close();
+	} /*產生紀錄內容的文字檔，因為實作在多種型別上所以使用template*/
 };
 
 #endif
