@@ -125,11 +125,13 @@
   <ItemGroup>
     <ClInclude Include="deception.h" />
     <ClInclude Include="SimulatedAnnealing.h" />
+    <ClInclude Include="Tabu.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="deception.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SimulatedAnnealing.cpp" />
+    <ClCompile Include="Tabu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\x64\Debug\plot_SA.plt" />
