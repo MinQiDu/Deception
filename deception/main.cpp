@@ -2,7 +2,8 @@
 #include "SimulatedAnnealing.h"
 #include "Tabu.h"
 #include <string>
-#include <algorithm> // for all_of(input.begin(), input.end(), ::isdigit)
+#include <algorithm> // for all_of(input.begin(), input.end(), ::isdigit) & transform(輸入起點, 輸入終點, 輸出起點, 處理函式);
+#include <cctype> // for toupper() tolower()
 using namespace std;
 
 bool is_num(const string& input)
@@ -34,7 +35,11 @@ int main(int argc, char *argv[])
 	int bit = stoi(argv[1]);
 	int run = stoi(argv[2]);
 	int iter = stoi(argv[3]);
-	string algo_type = argv[5]; /*選演算法*/
+	string algo_type = argv[5];  /*選演算法*/
+	transform(algo_type.begin(), /*防呆! 轉換algo_type成全大寫*/
+		algo_type.end(),
+		algo_type.begin(),
+		toupper);
 
 	if (algo_type == "SA")
 	{
@@ -53,7 +58,7 @@ int main(int argc, char *argv[])
 
 	else
 	{
-		cout << "Choose Algorithm ( SA )" << endl;
+		cout << "Choose Algorithm ( SA / TB)" << endl;
 	}
 
 };
