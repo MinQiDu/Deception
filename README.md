@@ -111,7 +111,8 @@ gnuplot plot_TB.plt
 result_Deception_TB_bit_size_tweak.png
 
 ## 6. 檔案結構
-- deception/   
+- deception/  
+`main.cpp`          
 `SimulatedAnnealing.cpp` / `SimulatedAnnealing.h`      
 `Tabu.cpp` / `Tabu.h`   
 `deception.cpp` / `deception.h`
