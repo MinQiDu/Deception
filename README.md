@@ -2,10 +2,10 @@
 
 ## ( I ) Introduction
 
-- Language: C++
-- Metaheuristic algorithms: Simulated Annealing (SA), Tabu Search (TB)
-- Benchmark function: Deception Problem
-- Objective: Maximize \( f(x) = |\text{b2b}(x) - 2^{bit - 2}| \)
+- **Programming language:** C++
+- **Metaheuristic algorithms:** Simulated Annealing (SA), Tabu Search (TB)
+- **Benchmark function:** Deception Problem
+- **Objective function:** Maximize \( f(x) = |\text{b2b}(x) - 2^{bit - 2}| \)
 
 ## ( II ) Main Functionality
 
