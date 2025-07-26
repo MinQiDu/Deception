@@ -1,118 +1,146 @@
-# 使用 SimulatedAnnealing / TabuSearch 解 Deception problem
+# Implement SimulatedAnnealing / TabuSearch for Solving Deception Problem
 
-## 1. 基本說明
+## ( I ) Introduction
 
-- Using C++
-- Implement SimulatedAnnealing / TabuSearch to solve Deception problem : maximize f(x) = abs(b2b(x) - pow(2, bit - 2))
+- Language: C++
+- Metaheuristic algorithms: Simulated Annealing (SA), Tabu Search (TB)
+- Benchmark function: Deception Problem
+- Objective: Maximize \( f(x) = |\text{b2b}(x) - 2^{bit - 2}| \)
 
-
-
-## 2. 主要功能 
+## ( II ) Main Functionality
 
 ### `SimulatedAnnealing`
 
-- void RunALG(int bit, int run, int iter) : 執行SA
-- void Init(vector<int> &sol, int &value) : 隨機產生初始解
-- vector<int> Neighbor(const vector<int> &sol) : 多點變異產生鄰居
-- void Evaluation(const vector<int> &sol, int &value) : 計算新解的value
-- void T_cooldown(double &temp) : 降低溫度
-- void T_reheat(double &temp) : 升高溫度
-- void Create_Vrecord(const string& filename, const vector<double>& content) : create.txt to record values
+- `void RunALG(int bit, int run, int iter)`  
+  *Runs SA algorithm*
+- `void Init(vector<int>& sol, int& value)`  
+  *Generates a random initial solution*
+- `vector<int> Neighbor(const vector<int>& sol)`  
+  *Generates a neighbor by multi-bit mutation*
+- `void Evaluation(const vector<int>& sol, int& value)`  
+  *Evaluates the solution’s fitness value*
+- `void T_cooldown(double& temp)` / `void T_reheat(double& temp)`  
+  *Controls the temperature schedule*
+- `void Create_Vrecord(const string& filename, const vector<double>& content)`  
+  *Outputs fitness values to a `.txt` file*
 
 ### `TabuSearch`
 
-- void RunALG(const int& _bit,
-			const int& _run,
-			const int& _iter,
-			const int& _tabu_size,
-			const int& _tweak_num) : 執行TabuSearch
+- `void RunALG(int bit, int run, int iter, int tabu_size, int tweak_num)`  
+  *Runs Tabu Search*
+- `vector<int> Init()`  
+  *Initializes a solution and sets initial best*
+- `vector<int> Tweak(const vector<int>& origin_sol)`  
+  *Generates `tweak_num` tweaked neighbors*
+- `int Evaluation(const vector<int>& sol)`  
+  *Calculates the fitness of a solution for Deception*
+- `void Create_Record(const string& filename, const vector<T>& content)`  
+  *Outputs records to `.txt`, supports multiple data types via templates*
 
-- vector<int> Init() : 產生初始解並輸出，設定best_sol, best_fit初始值
-- vector<int> Tweak(const vector<int> &origin_sol) : 微調origin_sol tweak_num次並輸出
-- int Evaluation(const vector<int>& sol) : 計算sol的onemax fitness，輸出fitness
-- void Create_Record(const string& filename, const vector<T>& content) : 產生紀錄內容的文字檔，因為實作在多種型別上所以使用template
+## ( III ) Input
 
+### Command-line arguments:
 
+- **Bit Length:** `bit = (4 or 10)`
+- **Number of Independent Runs:** `run = (e.g., 30)`
+- **Number of Iterations per Run:** `iter = (1000 for SA / 5000 for TB)`
+- `pop_size = unused (placeholder)`
+- **Type of Algorithm:** `algo_type = SA / TB`
+- For Tabu Search:
+  - **Size of Tabu List:** `tabu_size = 5`
+  - **Times of Tweak:** `tweak_num = 20`
 
-## 3. Input 
-
-### command_line argument :
-
-- 二進位位元數 | bit = 4 or 10
-- 回合數 | run = 30
-- 單回合迭代次數 | iter = 1000(SA) / 5000(TB)
-- 一世代人口數 | pop_size = no use
-- 演算法種類 | algo_type = SA / TB
-- (TabuSearch)         
-Please type tabu_size = 輸入tabu_size   
-Please type tweak_num = 輸入tweak_num
-
-
-## 4. Output 
+## ( IV ) Output
 
 ### `SimulatedAnnealing`
 
-- values_of_run~30_SA_幾bit.txt
-- values_average_SA_幾bit.txt
-- plot_SA.plt
-- result_Deception_SimulatedAnnealing_幾bit.png
+- `values_of_run~30_SA_{bit}.txt`
+- `values_average_SA_{bit}.txt`
+- `plot_SA.plt`
+- `result_Deception_SimulatedAnnealing_{bit}.png`
 
-### `Tabusearch`
-- fitness_of_run_1~30_TB_bit_size_tweak.txt
-- fitness_average_TB_bit_size_tweak.txt
-- plot_TB.plt
-- result_Deception_TB_bit_size_tweak.png
+### `TabuSearch`
 
+- `fitness_of_run_1~30_TB_bit_size_tweak.txt`
+- `fitness_average_TB_bit_size_tweak.txt`
+- `plot_TB.plt`
+- `result_Deception_TB_bit_size_tweak.png`
 
+## ( V ) How to Compile, Run and Result Visualization
 
-## 5. 執行方式 
+### Compile
 
-### `------------編譯------------`
+#### Visual Studio
 
-#### `VisualStudio`
-1. 開啟 Visual Studio 專案 `deception.sln`
-2. 按下 `Ctrl + F5` 開始編譯
+1. Open the solution `deception.sln`
+2. Press `Ctrl + F5` to build
 
-#### `VSCode`
-1. 在 Windows cmd 或 PowerShell 中
-2. 先到正確資料夾路徑
-3. 輸入 :
+#### VSCode
 
+1. Open CMD or PowerShell
+2. Navigate to the project folder
+3. Run:
+```bash
 g++ main.cpp deception.cpp SimulatedAnnealing.cpp Tabu.cpp -o deception.exe
+```
 
+### Run
 
-### `------------執行------------`
-
-1. 在 Windows cmd 或 PowerShell 中
-2. 先到正確資料夾路徑
-3. 輸入 :   
-.\deception.exe bit run iter pop_size algo_type   
-eg. 
+```bash
+.\deception.exe bit run iter pop_size algo_type
+```
+Examples:
+```bash
 .\deception.exe 10 30 1000 1 SA
 .\deception.exe 10 30 5000 0 TB
--->Please type tabu_size = 輸入tabu_size   
--->Please type tweak_num = 輸入tweak_num
+```
+Then:
+```
+Please type tabu_size = (your input)
+Please type tweak_num = (your input)
+```
 
+### Result Visualization
 
+1. Install gnuplot
+2. Run:
+```bash
+gnuplot plot_SA.plt
+gnuplot plot_TB.plt
+```
+Generated PNGs will be found in the working directory
 
-### `------------出圖------------`
+## ( VI ) File Structure
 
-1. 安裝gnuplot
-2. 在 Windows cmd 或 PowerShell 中
-3. 先到正確資料夾路徑
-4. 輸入 : 
+```
+deception/
+|
+├── main.cpp
+├── deception.cpp / deception.h
+├── SimulatedAnnealing.cpp / SimulatedAnnealing.h
+├── Tabu.cpp / Tabu.h
+│
+├── results/  ← output files (.txt, .png)
+└── README.md ← this file
+```
 
-gnuplot plot_SA.plt   
-即可在資料夾中找到 
-result_Deception_SimulatedAnnealing_幾bit.png
+## ( VII ) Observations
+- Simulated Annealing performs well in avoiding local optima by probabilistic acceptance of worse solutions.
+- Tabu Search maintains a memory structure to avoid revisiting explored areas, which helps in escaping plateaus.
+- Tabu Search is more sensitive to `tweak_num` and `tabu_size` parameters.
+- Both algorithms are suitable for deception landscapes due to their non-greedy mechanisms.
 
-gnuplot plot_TB.plt   
-即可在資料夾中找到
-result_Deception_TB_bit_size_tweak.png
+## ( VIII ) Key Features
+- Objective function tailored for deceptive landscape
+- C++ implementation with modular design
+- Exportable logs and gnuplot-ready visualization scripts
+- Interactive runtime configuration via command-line and user input
 
-## 6. 檔案結構
-- deception/  
-`main.cpp`          
-`SimulatedAnnealing.cpp` / `SimulatedAnnealing.h`      
-`Tabu.cpp` / `Tabu.h`   
-`deception.cpp` / `deception.h`
+## ( IX ) Skills Demonstrated
+- Advanced metaheuristic algorithm implementation
+- Custom fitness landscape evaluation (deception)
+- Iterative local search (SA) and memory-based search (TB)
+- Parameter-driven control of neighborhood exploration
+- Integration with gnuplot for visual output
+- Runtime I/O and template-based logging
+
