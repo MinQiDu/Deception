@@ -124,19 +124,33 @@ deception/
 └── README.md ← this file
 ```
 
-## ( VII ) Observations
+## ( VII ) Experimental Results
+
+### 4 bits Deception Problem
+<p align="center">
+  <img src="results/SimulatedAnnealing/result_Deception_SimulatedAnnealing_4bit_flip1~4bit.png" width="49%"/>
+  <img src="results/TabuSearch/result_Deception_TB_4bit_size5_tweak20.png" width="49%"/>
+</p>
+
+### 10 bits Deception Problem
+<p align="center">
+  <img src="results/SimulatedAnnealing/result_Deception_SimulatedAnnealing_10bit_flip1~4bit.png" width="49%"/>
+  <img src="results/TabuSearch/result_Deception_TB_10bit_size5_tweak20.png" width="49%"/>
+</p>
+
+## ( VIII ) Observations
 - Simulated Annealing performs well in avoiding local optima by probabilistic acceptance of worse solutions.
 - Tabu Search maintains a memory structure to avoid revisiting explored areas, which helps in escaping plateaus.
 - Tabu Search is more sensitive to `tweak_num` and `tabu_size` parameters.
 - Both algorithms are suitable for deception landscapes due to their non-greedy mechanisms.
 
-## ( VIII ) Key Features
+## ( IX ) Key Features
 - Objective function tailored for deceptive landscape
 - C++ implementation with modular design
 - Exportable logs and gnuplot-ready visualization scripts
 - Interactive runtime configuration via command-line and user input
 
-## ( IX ) Skills Demonstrated
+## ( X ) Skills Demonstrated
 - Advanced metaheuristic algorithm implementation
 - Custom fitness landscape evaluation (deception)
 - Iterative local search (SA) and memory-based search (TB)
